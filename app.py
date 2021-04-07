@@ -2,17 +2,29 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import os, pickle, requests, json
+import os, pickle, requests, json, sys
 
 def main():
-    response = input('1 to search\n')
+    print('-_-_-_- WebTool5000 -_-_-_-'.center(50))
 
-    if response == '1':
-        anime = input('Search an anime: ')
+    while True:
+        response = input('1) Search Anime\n2) List current saved animes\n3) Settings\n4) Exit\n\n~> ')
 
-        data = query_anime(anime)
+        if response == '1':
+            anime = input('Search an anime: ')
+                
+            data = query_anime(anime)
 
-        anime_selection(data)
+            anime_selection(data)
+
+        elif response == '2':
+            fetch_animes()
+
+        elif response == '3':
+            pass
+
+        elif response == '4':
+            sys.exit(0)
 
     print('Current Animes:')
     options = Options()
@@ -24,12 +36,16 @@ def main():
     driver.get('http://www.google.com')
 
 def fetch_animes():
+    data = {}
     if os.path.exists('db.txt'):
         f = open('db.pickle', 'rb')
 
-        return pickle.load(f)
+        data = pickle.loads(f)
     else:
-       pass 
+        pickle.dumps(data)
+
+    if len(data) == 0:
+        print('No animes saved :(')
 
 def query_anime(name):
     
