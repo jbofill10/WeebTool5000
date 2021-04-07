@@ -14,14 +14,14 @@ def main():
 
         anime_selection(data)
 
-    #print('Current Animes:')
-    #options = Options()
-    #options.add_extension('extension_1_34_0_0.crx')
-    #global driver
-    #driver = webdriver.Chrome(options=options, 
-     #       executable_path='/usr/local/lib/python3.8/dist-packages/chromedriver_py/chromedriver_win32.exe')
+    print('Current Animes:')
+    options = Options()
+    options.add_extension('extension_1_34_0_0.crx')
+    global driver
+    driver = webdriver.Chrome(options=options, 
+            executable_path='/usr/local/lib/python3.8/dist-packages/chromedriver_py/chromedriver_win32.exe')
     
-    #driver.get('http://www.google.com')
+    driver.get('http://www.google.com')
 
 def fetch_animes():
     if os.path.exists('db.txt'):
