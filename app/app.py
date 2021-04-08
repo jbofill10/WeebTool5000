@@ -2,7 +2,11 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+from website_util import util
+
 import os, pickle, requests, json, sys
+
 
 def main():
     cnf = config()
@@ -14,8 +18,8 @@ def main():
 
         if response == '1':
             anime = input('Search an anime: ')
-                
-            data = query_anime(anime)
+            
+            data = util.query_anime(anime)
 
             selected_anime = anime_selection(data)
 
@@ -58,16 +62,6 @@ def fetch_animes():
     if len(data) == 0:
         print('No animes saved :(')
 
-def query_anime(name):
-    
-    res = requests.get(f'https://www2.kickassanime.rs/search?q={name}').text
-    
-    res = res[res.index('[{'):res.index('}]')+2]
-    
-    data = json.loads(res)
-    
-    return data
-
 def anime_selection(data):
     for i in range(0, len(data)-1, 2):
         print('{}) {:70s} {}) {}'.format(i+1, data[i]['name'], i+2, data[i+1]['name']))
@@ -77,6 +71,11 @@ def anime_selection(data):
     return data[int(selection)-1]
 
 def save_anime(anime):
+
+    episode = util.get_episode(anime['slug'], '01')
+    
+    anime['curr_ep'] = episode
+    
     data = []
     data.append(anime)
     f = open('db.pickle', 'wb')
@@ -89,7 +88,7 @@ def config():
 
         cnf = pickle.load(f)
 
-        print(f'\nWelcome back, {cnf["name"]}\n') 
+        print(f'\nWelcome back, {cnf["name"]}\n')
 
     else:
         cnf = {}
