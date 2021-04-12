@@ -1,4 +1,4 @@
 selenium
-chromedriver-py==89.0.4389.23
+chromedriver-binary-auto
 beautifulsoup4
 requests

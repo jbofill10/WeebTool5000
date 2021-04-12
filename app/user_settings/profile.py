@@ -1,4 +1,6 @@
-import os, pickle
+import os
+import pickle
+
 
 def config():
     if os.path.exists('user.cnf'):
@@ -19,4 +21,4 @@ def config():
 
         pickle.dump(cnf, f)
 
-   
+    return cnf
