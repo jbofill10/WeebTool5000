@@ -13,11 +13,14 @@ class Browser:
             self.bin_path = '/dist-packages/chromedriver_py/chromedriver_win32.exe'
 
         self.user_cnf = user_cnf
-
         self.options = Options()
         self.options.add_extension('extension_1_34_0_0.crx')
+
+        self.options.add_argument("--autoplay-policy=no-user-gesture-required")
 
         self.driver = webdriver.Chrome(options=self.options)
 
     def watch_episode(self, ep):
         self.driver.get(self.base_url + ep)
+
+        self.current_ep = self.base_url + ep
