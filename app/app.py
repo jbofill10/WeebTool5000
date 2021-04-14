@@ -4,6 +4,7 @@ from website_util import util
 from user_settings import profile
 from browser import Browser
 from rich.console import Console
+from multiprocessing import Process
 
 import cli
 import sys
@@ -37,9 +38,13 @@ def main():
         elif response == '2':
 
             anime = cli.pick_anime()
-            print(anime)
+
             brwser = Browser(user_cnf)
+
             brwser.watch_episode(anime['curr_ep'])
+
+            # track browser url
+            Process(target=brwser.manage_url).start()
 
         elif response == '3':
             pass
