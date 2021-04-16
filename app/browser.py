@@ -1,8 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+import cli
 import chromedriver_binary
-
+import sys
 
 class Browser:
 
@@ -28,15 +29,22 @@ class Browser:
     def manage_url(self):
 
         while self.browser_status():
-            curr_url = self.driver.current_url
-            if curr_url == self.current_ep:
-                continue
 
-            if curr_url != self.current_ep:
-                parsed_url = self.parse_url(curr_url)
+            try:
+                curr_url = self.driver.current_url
+
+                if curr_url == self.current_ep:
+                    continue
+
+                if curr_url != self.current_ep:
+                    parsed_url = self.parse_url(curr_url)
 
                 if parsed_url in self.current_ep and 'episode' in curr_url:
                     self.current_ep = curr_url
+                    cli.update_ep(self.current_ep[len(self.base_url):])
+
+            except:
+                break
 
     def browser_status(self):
         try:

@@ -82,3 +82,13 @@ def save_anime(anime):
 
     f = open('db.pickle', 'wb')
     pickle.dump(data, f)
+
+
+def update_ep(ep):
+
+    f = open('db.pickle', 'rb')
+    data = pickle.load(f)
+
+    pickle.dump(data, file=f)
+
+    f.close()
