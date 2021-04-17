@@ -1,28 +1,19 @@
 from rich.console import Console
 from rich.table import Table
 from website_util import util
-
-import pickle
-import os
+from user_settings import profile
 
 console = Console()
 
 
 def pick_anime():
 
-    if os.path.exists('db.pickle'):
-        f = open('db.pickle', 'rb')
-
-        data = pickle.load(f)
-
-    else:
-        f = open('db.pickle', 'wb')
-        pickle.dump(data, file=f)
-        return
+    data = profile.get_config()
 
     if len(data) == 0:
         print('No animes saved :(')
         return
+
     table = Table(title='Saved Animes')
     table.add_column("Name", style='cyan')
     table.add_column("Current Episode", style='green')
@@ -56,7 +47,8 @@ def pick_anime():
 def anime_selection(data):
 
     for i in range(0, len(data)-1, 2):
-        print('{}) {:70s} {}) {}'.format(i+1, data[i]['name'], i+2, data[i+1]['name']))
+        print('{}) {:70s} {}) {}'.format(i+1, data[i]['name'],
+                                         i+2, data[i+1]['name']))
 
     selection = input('~> Enter number to add anime to collection: ')
 
@@ -71,8 +63,7 @@ def save_anime(anime):
 
     anime['curr_ep'] = episode
 
-    if os.path.isfile('db.pickle'):
-        data = pickle.load(open('db.pickle', 'rb'))
+    data = profile.get_config()
 
     if anime['name'] not in data:
         data[anime['name']] = anime
@@ -80,15 +71,13 @@ def save_anime(anime):
     else:
         print('Already have this anime saved!')
 
-    f = open('db.pickle', 'wb')
-    pickle.dump(data, f)
+    profile.save_config(data)
 
 
-def update_ep(ep):
+def update_ep(ep_name, ep):
 
-    f = open('db.pickle', 'rb')
-    data = pickle.load(f)
+    data = profile.get_config()
 
-    pickle.dump(data, file=f)
+    data[ep_name]['curr_ep'] = ep
 
-    f.close()
+    profile.save_config(data)

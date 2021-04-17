@@ -3,13 +3,14 @@ from selenium.webdriver.chrome.options import Options
 
 import cli
 import chromedriver_binary
-import sys
+
 
 class Browser:
 
     base_url = 'https://www2.kickassanime.rs'
 
     def __init__(self, user_cnf):
+        # TODO Figure out wsl shit
         if user_cnf['wsl']:
             self.bin_path = '/dist-packages/chromedriver_py/chromedriver_win32.exe'
 
@@ -26,7 +27,7 @@ class Browser:
 
         self.current_ep = self.base_url + ep
 
-    def manage_url(self):
+    def manage_url(self, ep_name):
 
         while self.browser_status():
 
@@ -41,7 +42,8 @@ class Browser:
 
                 if parsed_url in self.current_ep and 'episode' in curr_url:
                     self.current_ep = curr_url
-                    cli.update_ep(self.current_ep[len(self.base_url):])
+                    cli.update_ep(ep_name,
+                                  self.current_ep[len(self.base_url):])
 
             except:
                 break

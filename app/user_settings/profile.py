@@ -22,3 +22,18 @@ def config():
         pickle.dump(cnf, f)
 
     return cnf
+
+
+def get_config():
+
+    if not os.path.exists('db.pickle'):
+        open('db.pickle', 'wb').close()
+
+    return pickle.load(open('db.pickle', 'rb'))
+
+
+def save_config(data):
+
+    f = open('db.pickle', 'wb')
+
+    pickle.dump(data, f)

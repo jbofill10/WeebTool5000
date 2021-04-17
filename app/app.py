@@ -17,7 +17,7 @@ def main():
     user_cnf = profile.config()
 
     console.print('-_-_-_- WeebTool5000 -_-_-_-'.center(50), style='bold red')
-
+    print('\n')
     while True:
         response = input('1) Search Anime\n' +
         '2) List current saved animes\n' +
@@ -44,7 +44,8 @@ def main():
             brwser.watch_episode(anime['curr_ep'])
 
             # track browser url
-            Process(target=brwser.manage_url).start()
+            Process(target=brwser.manage_url,
+                    kwargs={'ep_name': anime['name']}).start()
 
         elif response == '3':
             pass
