@@ -57,7 +57,21 @@ def anime_selection(data):
 
 def save_anime(anime):
 
-    episode = util.get_episode(anime['slug'], '01')
+    res = input(f'Have you already started watching {anime["name"]}? [y/N]: ')
+
+    if res == 'y':
+
+        print('What episode are you on?:')
+
+        ep = input('~> ')
+
+        ep = '0'+ep if ep[0] != 0 and int(ep) < 10 else ep
+
+        episode = util.get_episode(anime['slug'], ep)
+
+    else:
+
+        episode = util.get_episode(anime['slug'], '01')
 
     data = dict()
 
@@ -66,9 +80,11 @@ def save_anime(anime):
     data = profile.get_config()
 
     if anime['name'] not in data:
+
         data[anime['name']] = anime
 
     else:
+
         print('Already have this anime saved!')
 
     profile.save_config(data)

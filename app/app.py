@@ -31,8 +31,6 @@ def main():
 
             selected_anime = cli.anime_selection(data)
 
-            print(selected_anime)
-
             cli.save_anime(selected_anime)
 
         elif response == '2':

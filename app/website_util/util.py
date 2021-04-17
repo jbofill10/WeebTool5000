@@ -12,7 +12,6 @@ def query_anime(name):
 
     data = json.loads(res)
 
-    print(data)
     return data
 
 

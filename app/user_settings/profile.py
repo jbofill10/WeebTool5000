@@ -27,7 +27,11 @@ def config():
 def get_config():
 
     if not os.path.exists('db.pickle'):
-        open('db.pickle', 'wb').close()
+        f = open('db.pickle', 'wb')
+
+        pickle.dump({}, f)
+
+        f.close()
 
     return pickle.load(open('db.pickle', 'rb'))
 
@@ -37,3 +41,5 @@ def save_config(data):
     f = open('db.pickle', 'wb')
 
     pickle.dump(data, f)
+
+    f.close()
