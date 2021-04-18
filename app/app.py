@@ -13,7 +13,7 @@ console = Console()
 
 
 def main():
-
+    cli.clear_cli()
     user_cnf = profile.config()
 
     console.print('-_-_-_- WeebTool5000 -_-_-_-'.center(50), style='bold red')
@@ -23,10 +23,72 @@ def main():
                          '2) Watch Anime\n' +
                          '3) Settings\n' +
                          '4) Exit\n\n~> ')
-
+        cli.clear_cli()
         # Search anime
         if response == '1':
-            anime = input('Search an anime: ')
+
+            print(r"""
+                       ..                                                                                                    
+            'l:.      'xc                                                                                                    
+            .x0l.     ,kd.                                                 .                                                 
+             ,x0o.    ,Ox'                                                .'..                                               
+      .'.     'd0x,   'kO;                                                .''..                                              
+     .ckxc'    .l0Oc. ,kKl                                               .''''..                                             
+      .,oOOx:.  .:O0xox0Kx'   .cl;.                  ...         .       .''''''.                                            
+         .;dOOdc;oOKKKKKKKd..ckx;                    ..'..       ..     .''...''..                                           
+            .:xKKKKKKKKKKOdld0o.                      .'''..     ...   ..''. ..''..                                          
+    .;olc:;,,:xKKKXKKKK0xodOKO,                       .'''''.    .'..  .''.   .'''.       ..                                 
+     .,clddxxOKKKKKKKKKxdOKKK0:                       .''''''... ..'. .''.     .'''.    ...     ......                       
+            .,dKKKKKKK0dkKKKKO;                       .''...'''....''..'..      .''.  ....  ...'''''.                        
+              'xKKKXKK0xOXKKKl.                       ..'.  ...''..''''..        .''........''....'.                         
+               ,xKKKKKKKKK0ko,...             ..       .'.     ..''.....         ..''''....... ..'.                          
+                .:dO0KKOxoc:;;,'.              ...     .'.       ......           ....'...     .'.                           
+                   .,clc;,,'.....              ..'..   .'.        ..                ...       .'.                            
+                   .',,'............            .'''....'.                                   ....   ..                       
+                ..,,'.........',,,'.             .'''''''.                                   ...  ...                        
+                ..........',;;;;;;;.             ......'..                                  ......'.                         
+                   ....',;;;;;:cccc:'             .'.  ...       .....                     ..'.....                          
+                   ..,;;,;;:cccccccc:.            ...       .;c:;;lollc'.    .'.  ..       .......                           
+                   .,;,;:cccccccccccc;.            ...   .;cok00000KKKKOl,':oxdcll;.....   .  ...                            
+                     .:ccccccccccccclc,.           ...   'xKKOxxddk0KKKKK00KKKKKK0kkkxl'.    ...                             
+                     .,cccccclccccccccc'            .. .;kK0kxkO0OkOKKKKKKKKKK0OkxxOK0o'.    ..                              
+                      .;cclcclclccllccc:.           ....cOKK00Okxxk0KKKKKKKKKKOkOOkkOKk:.   ..                               
+                       .:ccccccclcclc::c:,.          ...:OK0dodoccldkKKKKKKKKK0OO0KK0KO;   ..                                
+                        'ccccccccc::;;:ccc'        ....;OKOllxxkd'.:dOKKKKKK0xoodxxOKKKd. ..                                 
+                         ,ccccc::;;;,;:ccc,.      'clc,oKKxcd:.;:. ,kKKKKKKKxcdo;cdokKk;...                                  
+                         .;cc:;::c:;;;ccccc;.    .o0kl:l0Kxdx:.....cOKKKKKKKd,:;..oddKx' .                                   
+                          .;c:cccc:;;ccccccc:'   'xkoc;ckKKKKxlc;,:xKKKKKKKKo'...,oodKk,.,.                                  
+                           .;ccclc:;cccccccccc,. .lkdo:;dKXKXKK0xxOKKKK0dkKKx:,,;dkxO0dcldo'                                 
+                            'ccccc:clcccccccccc;. .;dkxclKKKKKKKKKKKKKKOdkKKKOxxkKXKKd::cxx,                                 
+                            .':ccccccccccccccccc:.  .,c,c0KKKKKK0xdkOOOOOO00KKKKKKKKx;,c:dx'                                 
+                              .;clccccccccccccccc:.     'xKKKKXK0c':lodddolldKKKKKKO:':ll:.                                  
+                               .:cclcccccccccccccc:,'..  ,d0KKXKKd;ldxxxdl,;kKKKKK0l;ll;.                                    
+                                .:ccccccccccccccclcccc'  .,:lk00K0xoxxkkxolkKKKK0kc....                                      
+                                 .:cccccccccccccclcclc:. ..''',:dO0OxkOkdx0K0Odc,.                                           
+                                  .;clccccccccccccclccc:'........,cdO000Oxdl;.                                               
+                                   .,ccccccccccc;;cclcclc;'.........,cc:,'''.......                                          
+                                     ':ccccccc:,':ccccclccc;'.........''.....'''''.                                          
+                                      .;cccc:;'.,cclccccccccc;,'......'............                                          
+                                       .,c:;,'.':ccccccccclccccc,.'.................                                         
+                                         .'''..;ccccccccccccccl:,;:,,,.';;;;;;;::cc:;,..                                     
+                                          ....,ccccccccccccccc:,,:;,:;,:clcccccclcccclcc;,..                                 
+                                            .':lccccccccccccc;',::,,:;;clcccccccccccccccclc:.                                
+                                            .,cccllcccccccclc;';c;,;:;:ccccccccccccccc:;ccl:.                                
+                                            .:clccccccccccll:,;::,,:;;cccccccccccccccc;;::c:'                                
+                                           .;ccccccc:;;;:clc;;:::,;:;:ccccccccccccccc:,,;:ccc'                               
+                                           'clcc::;;;;;,;cl:;;cc;,::,:cccccllclcccclc;',:cccc,.                              
+                                          .;c:;;;;,;;;:cccc:,:c:,;:;,cccccccc::cccccc,':ccccc;.                              
+                                          .;;;,,,,;:ccccclc;,:c:,;:,;cccccc:,,;;clcl:,;cccccc:.                              
+                                         .,;',,;:cllccccccc;;cc;,::,;ccccccc;;;;;:cl:,;ccccccc;.                             
+                                         .::;:ccccccccccll:,;c:,,:;,:lllccccc:;;;;:c;,:lccccccc'                             
+                                         ,cccccccccccccccc;;:::,;:;;ccccccllccc;;;,;,,:lccclccl;.                            
+                                        .,;;;;;;;;;;:::;;;,;c:;,;c;,cccccllccccc;;;,.':lcccccclc'                            
+                                        .;;;;;;;;;;;;;;;;;:c:,',:c;,,:clcllcccllc;;'..:lcccccccc;.                           
+                                        .............''',,,,....,:c:;,;;::cccclccc;,..:lccccccccc'                           
+                                            .. ..................';cc::,,,,,;;:ccll:..:lccccccccc,.
+                    """)
+            console.print('-_-_- Searching for anime -_-_-\n', style='bold red')
+            anime = input('~> ')
 
             data = util.query_anime(anime)
 
@@ -119,6 +181,8 @@ def main():
         # Exit
         elif response == '4':
             sys.exit(0)
+
+        cli.clear_cli()
 
 
 if __name__ == '__main__':

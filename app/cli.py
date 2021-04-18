@@ -3,7 +3,13 @@ from rich.table import Table
 from website_util import util
 from user_settings import profile
 
+import os
+
 console = Console()
+
+
+def clear_cli():
+    print(chr(27) + "[2J")
 
 
 def pick_anime():
@@ -35,7 +41,7 @@ def anime_selection(data):
 
 
 def save_anime(anime):
-    print(anime)
+
     res = input(f'Have you already started watching {anime["name"]}? [y/N]: ')
 
     if res == 'y':
