@@ -14,28 +14,7 @@ def pick_anime():
         print('No animes saved :(')
         return
 
-    table = Table(title='Saved Animes')
-    table.add_column("Name", style='cyan')
-    table.add_column("Current Episode", style='green')
-
-    cnt = 1
-
-    for k, v in data.items():
-        ep = v['curr_ep']
-
-        ep = ep[ep.rindex('/')+1:]
-
-        ep = ep[:ep.rindex('-')].split('-')
-
-        table.add_row(f'{cnt}) {v["name"]}', f'{ep[0].capitalize()} {ep[1]}')
-
-        cnt += 1
-
-    print('\n\n')
-
-    console.print(table)
-
-    print('\n\n')
+    show_animes()
 
     anime = input('~> Select an anime by number: ')
 
@@ -56,12 +35,12 @@ def anime_selection(data):
 
 
 def save_anime(anime):
-
+    print(anime)
     res = input(f'Have you already started watching {anime["name"]}? [y/N]: ')
 
     if res == 'y':
 
-        print('What episode are you on?:')
+        print('What episode are you on?')
 
         ep = input('~> ')
 
@@ -72,8 +51,6 @@ def save_anime(anime):
     else:
 
         episode = util.get_episode(anime['slug'], '01')
-
-    data = dict()
 
     anime['curr_ep'] = episode
 
@@ -97,3 +74,31 @@ def update_ep(ep_name, ep):
     data[ep_name]['curr_ep'] = ep
 
     profile.save_config(data)
+
+
+def show_animes():
+
+    table = Table(title='Saved Animes')
+    table.add_column("Name", style='cyan')
+    table.add_column("Current Episode", style='green')
+
+    cnt = 1
+
+    data = profile.get_config()
+
+    for k, v in data.items():
+        ep = v['curr_ep']
+
+        ep = ep[ep.rindex('/')+1:]
+
+        ep = ep[:ep.rindex('-')].split('-')
+
+        table.add_row(f'{cnt}) {v["name"]}', f'{ep[0].capitalize()} {ep[1]}')
+
+        cnt += 1
+
+    print('\n\n')
+
+    console.print(table)
+
+    print('\n\n')

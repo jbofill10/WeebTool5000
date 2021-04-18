@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import os
 import pickle
 
@@ -29,7 +31,7 @@ def get_config():
     if not os.path.exists('db.pickle'):
         f = open('db.pickle', 'wb')
 
-        pickle.dump({}, f)
+        pickle.dump(OrderedDict({}), f)
 
         f.close()
 
